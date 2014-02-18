@@ -182,6 +182,8 @@ module RightAws
         # calculate request data
       server, path, path_to_sign = fetch_request_params(headers)
       data = headers[:data]
+        # add the security token if present
+      headers = {"x-amz-security-token" => @params[:token]}.merge(headers) if @params[:token]
         # make sure headers are downcased strings
       headers = AwsUtils::fix_headers(headers)
         #
